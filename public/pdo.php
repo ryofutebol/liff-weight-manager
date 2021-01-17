@@ -7,27 +7,36 @@ class Connect {
     {
         try {
             // DB接続を試みる
-            $db  = new PDO('mysql:host=' . HOSTNAME . ';dbname=' . DATABASE, USERNAME, PASSWORD);
-            // $msg = "MySQL への接続確認が取れました。";
+            $pdo  = new PDO('mysql:host=' . HOSTNAME . ';dbname=' . DATABASE, USERNAME, PASSWORD,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
         } catch (PDOException $e) {
-            $isConnect = false;
-            $msg       = "MySQL への接続に失敗しました。<br>(" . $e->getMessage() . ")";
-            die();
+            echo $e->getMessage();
+            return false;
         }
 
-        return $msg;
-
+        return $pdo;
     }
 
-    function select()
-    {
-        $pdo = $this->pdo($sql);
-        $stmt = $pdo->query($sql);
-        $obj = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    function db_exec($sql) {
+        $pdo = db_conn();
+        try {
+            $stmt = $pdo->query($sql);
+        } catch (PDOException $e) {
+            print $e."<br>\n";
 
-        return $obj;
+        }
+
+        return $stmt;
     }
 
+    function db_fetch_obj($stmt) {
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }
 
 ?>
