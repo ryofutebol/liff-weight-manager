@@ -3,7 +3,7 @@ require_once('./pdo.php');
 
 $obj = new Connect();
 
-$pdo = $obj->pdo();
+$db_connect = $obj->pdo();
 
 ?>
 
@@ -15,6 +15,6 @@ $pdo = $obj->pdo();
     <title>LIFF体重管理</title>
 </head>
 <body>
-    <?=$pdo?>
+    <h1>Hello World</h1>
 </body>
 </html>

@@ -3,8 +3,9 @@ services:
   php-apache:
     build: ./docker/php-apache/
     # ドメインアクセスにするからもはやポートフォワーディングをする必要もない
+    # NOTE: ngrokを使う際はコメントアウトを消してポート8080を指定
 #    ports:
-#      - "8080:80"
+#      - "8080:8080"
     volumes:
       # プロジェクトディレクトリ自体を共有してapacheの方でDocumentRootを変える
       - .:/var/www/html
