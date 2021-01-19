@@ -23,7 +23,7 @@ class Connect {
     }
 
     function db_exec($sql) {
-        $pdo = db_conn();
+        $pdo = $this->pdo();
         try {
             $stmt = $pdo->query($sql);
         } catch (PDOException $e) {

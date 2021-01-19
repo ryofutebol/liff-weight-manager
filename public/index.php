@@ -5,6 +5,9 @@ $obj = new Connect();
 
 $db_connect = $obj->pdo();
 
+$sql = "";
+$result = $obj->db_exec($sql);
+
 ?>
 
 <!DOCTYPE html>
